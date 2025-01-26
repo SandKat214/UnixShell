@@ -75,31 +75,31 @@ I was responsible for implementing various functions across these modules to fac
 - **POSIX Standard**: The POSIX specification was used to guide the correct implementation of system calls and shell behaviors.
 - **Linux Man Pages & "The Linux Programming Interface"** by *M. Kerrisk*: These resources were invaluable in understanding system calls like `fork()`, `exec()`, `waitpid()`, and signal handling.
 
-## Challenges and Solutions
+### Challenges and Solutions
 
 Developing this unix-based shell involved addressing several technical and architectural challenges:
 
-### 1. **Signal Handling**
+#### 1. **Signal Handling**
    - **Challenge**: Implementing proper signal handling for process management was complex, especially for managing the behavior of foreground and background processes.
    - **Solution**: The `sigaction` system call was utilized to configure the shell to ignore certain signals (such as `SIGINT`) in the main shell loop. The signals were restored for child processes to ensure they could handle interruptions as needed (as detailed in Kerrisk’s *The Linux Programming Interface*).
    
-### 2. **Job Control and Process Groups**
+#### 2. **Job Control and Process Groups**
    - **Challenge**: Managing job control and ensuring that background jobs do not block foreground processes required proper handling of process groups.
    - **Solution**: The `setpgid` and `waitpid` system calls were crucial for managing job control, allowing processes to be grouped and tracked. The system ensured that background jobs could be monitored without interrupting the foreground process.
 
-### 3. **I/O Redirection**
+#### 3. **I/O Redirection**
    - **Challenge**: Correctly handling file descriptors for input/output redirection was necessary for commands like `echo > file.txt`.
    - **Solution**: Functions like `get_io_flags`, `move_fd`, and `do_io_redirects` utilized `open`, `dup2`, and `close` system calls to manipulate file descriptors and redirect input and output streams, ensuring seamless execution of commands with redirection.
 
-### 4. **Variable Management**
+#### 4. **Variable Management**
    - **Challenge**: Validating and expanding environment variables, particularly the handling of special characters like `$` and `*` in command arguments.
    - **Solution**: The `vars_is_valid_varname`, `vars_get`, `vars_set`, and `vars_export` functions managed the validation and assignment of variables. Additionally, the `expand_command_words` function expanded variables and special characters using custom logic.
 
-### 5. **Testing and Debugging**
+#### 5. **Testing and Debugging**
    - **Challenge**: Debugging a system that involves numerous interconnected components was difficult, especially with the asynchronous nature of job control and process handling.
    - **Solution**: Extensive use of the debug configuration in the `Makefile`, combined with strategically placed print statements, allowed for effective debugging of various modules. Testing individual components like `builtin_cd` and `run_command_list` with specific input helped ensure the correct behavior of the shell.
 
-## Sample of Key System Calls Used
+### Sample of Key System Calls Used
 
 - **`fork()`**: Used for creating child processes for executing commands.
 - **`execvp()`**: Executes external commands by searching the PATH environment variable.
