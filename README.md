@@ -6,7 +6,7 @@ This is a project designed to explore and understand the inner workings of Unix-
 
 It is composed of several modules that work together to implement the shell's functionality. The project uses a modular approach, with each module handling specific aspects of shell operation. Below is a breakdown of the key modules and methods I was responsible for implementing:
 
-### Main Module (`bigshell.c`)
+### Main Module
 
 - **`main()`**: The entry point for the shell, responsible for setting up signal handling, calling the parser and runner modules, and managing the main loop.
 - **Key responsibility**: Parse user input and execute commands via interactions with the parser and runner modules.
