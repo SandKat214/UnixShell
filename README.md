@@ -1,63 +1,31 @@
 # UnixShell
 
 This is a project designed to explore and understand the inner workings of Unix-based operating systems through the development of a custom command-line interface (shell). Written in C, it implements many core features typically found in Unix shells, including process creation and execution, signal handling, job control, variable management, and input parsing. It served as an educational tool to understand process management, system calls, I/O redirection, and other Unix system functions.
+Certainly! Here's how you can structure the program in the README:
 
-## Project Structure
+---
 
-It is composed of several modules that work together to implement the shell's functionality. The project uses a modular approach, with each module handling specific aspects of shell operation. Below is a breakdown of the key modules and methods I was responsible for implementing:
+## Program Structure
 
-### UnixShell Module (`unixshell.c`)
+It is composed of several modules that work together to implement the shell's functionality. The project uses a modular approach, with each module handling specific aspects of shell operation.
 
-- **`main()`**: The entry point for the shell, responsible for setting up signal handling, calling the parser and runner modules, and managing the main loop.
-- **Key responsibility**: Parse user input and execute commands via interactions with the parser and runner modules.
+### Directory and File Overview
 
-### Parser Module (`parser.c`, `parser.h`)
+- **src/**: Contains the core source code of the UnixShell program. This includes implementations for built-in commands, parsing input, handling jobs, signals, and process management.
 
-- **`command_list_parse()`**: Parses user commands into a structured format (`command_list`), handling argument separation, assignments, and I/O redirection.
-- **Key responsibility**: Convert user input into a structured representation for further processing by the runner module.
+  - **builtins.c** and **builtins.h**: Contains functions for handling built-in shell commands like `cd`, `exit`, etc.
+  - **exit.c** and **exit.h**: Manages the shell's exit functionality and any cleanup required before termination.
+  - **expand.c** and **expand.h**: Implements the logic for expanding variables and performing substitutions in shell commands.
+  - **jobs.c** and **jobs.h**: Manages background processes and job control (e.g., handling processes in the background, jobs list).
+  - **params.c** and **params.h**: Handles command line arguments passed to the shell and processes them for execution.
+  - **parser.c** and **parser.h**: Contains the code for parsing user input and separating commands.
+  - **runner.c** and **runner.h**: Manages the execution of parsed commands, handling forking processes and invoking the appropriate executables.
+  - **signal.c** and **signal.h**: Provides functionality for handling Unix signals like `SIGINT` and `SIGTERM`.
+  - **unixshell.c**: The main entry point of the program; starts the shell and manages the shell's loop and interactions.
+  - **vars.c** and **vars.h**: Handles shell variables, such as environment variables.
+  - **wait.c** and **wait.h**: Contains logic for waiting for processes to finish (such as using `waitpid` to manage child processes).
 
-### Runner Module (`runner.c`, `runner.h`)
-
-- **`run_command_list()`**: Main command execution function, which handles process management, I/O redirection, and job control. It forks processes and executes commands, including built-in and external commands.
-- **`expand_command_words()`**: Handles variable and special character expansion within command words.
-- **`do_variable_assignment()`**: Manages variable assignments and exports variables to the environment.
-- **Key responsibility**: Manage the execution of commands, handle process creation, I/O redirection, and job control.
-
-### Signal Module (`signal.c`, `signal.h`)
-
-- **`signal_init()`**: Initializes signal handling for the shell, setting appropriate handlers for various signals.
-- **`signal_ignore()`** and **`signal_enable_interrupt()`**: Used to modify signal behavior, including ignoring interrupt signals (e.g., `Ctrl-C`).
-- **Key responsibility**: Manage signal behavior within the shell, including handling interruptions and restoring default behavior.
-
-### Built-ins Module (`builtins.c`, `builtins.h`)
-
-- **`builtin_exit()`**: Handles the `exit` command, which terminates the shell.
-- **`builtin_cd()`**: Handles the `cd` command, changing the current directory.
-- **`builtin_unset()`**: Removes environment variables.
-- **Key responsibility**: Implement built-in commands that modify the shell environment or control the shell’s execution.
-
-### Vars Module (`vars.c`, `vars.h`)
-
-- **`vars_is_valid_varname()`**: Validates variable names according to POSIX rules.
-- **`vars_get()`** and **`vars_set()`**: Get and set shell variables.
-- **Key responsibility**: Manage shell variables, including validation, retrieval, and modification.
-
-### Jobs Module (`jobs.c`, `jobs.h`)
-
-- **`jobs_add()`**: Adds a job to the shell’s job table.
-- **`jobs_remove()`**: Removes a job from the job table.
-- **Key responsibility**: Track and manage background jobs and job states.
-
-### Wait Module (`wait.c`, `wait.h`)
-
-- **`wait_on_fg_pgid()`**: Waits for all processes in the foreground process group to complete.
-- **`wait_on_bg_jobs()`**: Waits for background jobs to finish without blocking the foreground.
-- **Key responsibility**: Manage waiting operations for processes, ensuring that foreground and background processes are handled appropriately.
-
-### Exit Module (`exit.c`, `exit.h`)
-
-- **`exit_shell()`**: Handles the clean exit process for the shell.
-- **Key responsibility**: Ensure proper cleanup and termination of the shell.
+- **makefile**: A makefile that automates the process of building the project and managing dependencies.
 
 ## Implementation Overview
 
@@ -112,7 +80,6 @@ Developing this unix-based shell involved addressing several technical and archi
 
 ### 1. Clone the Repository
 First, clone the repository to your local machine:
-
 ```bash
 git clone https://github.com/SandKat214/UnixShell.git
 cd UnixShell
@@ -122,27 +89,37 @@ cd UnixShell
 You can build the project in different modes:
 
 - **To create both release and debug directories:**
-
   ```bash
   make
   ```
 
 - **To create only the release directory:**
-
   ```bash
   make release
   ```
 
 - **To create only the debug directory:**
-
   ```bash
   make debug
   ```
 
-### 3. Run the Program
+### 3. Navigate to the Correct Directory
+Once the build process is complete, navigate to the directory where the executable was created (either `release` or `debug`):
 
-After building the project, you can run the UnixShell program with the following command:
+- **For release:**
+  ```bash
+  cd release
+  ```
 
+- **For debug:**
+  ```bash
+  cd debug
+  ```
+
+### 4. Run the Program
+After navigating to the correct directory, you can run the UnixShell program with the following command:
 ```bash
 ./unixshell
 ```
+
+
