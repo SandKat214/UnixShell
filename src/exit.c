@@ -11,7 +11,7 @@
 /** cleans up and exits the shell
  */
 void
-bigshell_exit(void)
+unixshell_exit(void)
 {
   /* Send SIGHUP (Hangup) signal to all jobs */
   size_t job_count = jobs_get_joblist_size();

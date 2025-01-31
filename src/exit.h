@@ -1,4 +1,4 @@
 #pragma once
 
-/** exits bigshell (cleanly) */
-extern void bigshell_exit(void);
+/** exits unixshell (cleanly) */
+extern void unixshell_exit(void);

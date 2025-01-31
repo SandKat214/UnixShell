@@ -543,7 +543,7 @@ command_list_parse(struct command_list **cl, FILE *stream)
       char *s_copy = strdup(s);
       if (s_copy) {
         if (expand_prompt(&s_copy)) {
-          char prefix[] = "\n=== [BIGSHELL] ===\n";
+          char prefix[] = "\n=== [UNIXSHELL] ===\n";
           write(fileno(stream),
                 prefix,
                 sizeof prefix - (s_copy[0] != '\n' ? 1 : 2));

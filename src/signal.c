@@ -74,7 +74,7 @@ signal_ignore(int sig)
   return 0;
 }
 
-/** Restores signal dispositions to what they were when bigshell was invoked
+/** Restores signal dispositions to what they were when unixshell was invoked
  *
  * @returns 0 on success, -1 on failure
  *

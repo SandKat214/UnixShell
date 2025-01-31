@@ -16,7 +16,7 @@ int
 wait_on_fg_pgid(pid_t const pgid)
 {
   pid_t neg_pgid = -pgid;
-  pid_t bshellpgid;
+  pid_t ushellpgid;
 
   if (pgid < 0) return -1;
   jid_t const jid = jobs_get_jid(pgid);
@@ -27,7 +27,7 @@ wait_on_fg_pgid(pid_t const pgid)
    */
   if (kill(neg_pgid, SIGCONT) < 0) return -1;
 
-  if((bshellpgid = tcgetpgrp(STDIN_FILENO)) < 0) return -1;
+  if((ushellpgid = tcgetpgrp(STDIN_FILENO)) < 0) return -1;
     
   if (is_interactive) {
     /* Make 'pgid' the foreground process group
@@ -35,7 +35,7 @@ wait_on_fg_pgid(pid_t const pgid)
     if (tcsetpgrp(STDIN_FILENO, pgid) < 0) return -1;
   }
 
-  /* XXX From this point on, all exit paths must account for setting bigshell
+  /* XXX From this point on, all exit paths must account for setting unixshell
    * back to the foreground process group--no naked return statements */
   int retval = 0;
 
@@ -106,14 +106,14 @@ out:
   }
 
   if (is_interactive) {
-    /* Make bigshell the foreground process group again
+    /* Make unixshell the foreground process group again
      * XXX review tcsetpgrp(3)
      *
-     * Note: this will cause bigshell to receive a SIGTTOU signal.
+     * Note: this will cause unixshell to receive a SIGTTOU signal.
      *       You need to also finish signal.c to have full functionality here.
-     *       Otherwise you bigshell will get stopped.
+     *       Otherwise you unixshell will get stopped.
      */
-    if (tcsetpgrp(STDIN_FILENO, bshellpgid) < 0) return -1;
+    if (tcsetpgrp(STDIN_FILENO, ushellpgid) < 0) return -1;
   }
   return retval;
 }

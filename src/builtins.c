@@ -171,7 +171,7 @@ builtin_exit(struct command *cmd, struct builtin_redir const *redir_list)
     dprintf(get_pseudo_fd(redir_list, STDERR_FILENO), "exit: `%s': %s\n", cmd->words[2], strerror(EINVAL));
     return -1;
   }
-  bigshell_exit();
+  unixshell_exit();
   return -1;
 }
 
