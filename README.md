@@ -114,7 +114,7 @@ Developing this unix-based shell involved addressing several technical and archi
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/UnixShell.git
+git clone https://github.com/SandKat214/UnixShell.git
 cd UnixShell
 ```
 
