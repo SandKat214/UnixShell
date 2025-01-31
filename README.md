@@ -1,7 +1,6 @@
 # UnixShell
 
 This is a project designed to explore and understand the inner workings of Unix-based operating systems through the development of a custom command-line interface (shell). Written in C, it implements many core features typically found in Unix shells, including process creation and execution, signal handling, job control, variable management, and input parsing. It served as an educational tool to understand process management, system calls, I/O redirection, and other Unix system functions.
-Certainly! Here's how you can structure the program in the README:
 
 ---
 
