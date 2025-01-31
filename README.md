@@ -6,7 +6,7 @@ This is a project designed to explore and understand the inner workings of Unix-
 
 It is composed of several modules that work together to implement the shell's functionality. The project uses a modular approach, with each module handling specific aspects of shell operation. Below is a breakdown of the key modules and methods I was responsible for implementing:
 
-### Main Module
+### UnixShell Module (`unixshell.c`)
 
 - **`main()`**: The entry point for the shell, responsible for setting up signal handling, calling the parser and runner modules, and managing the main loop.
 - **Key responsibility**: Parse user input and execute commands via interactions with the parser and runner modules.
@@ -108,6 +108,41 @@ Developing this unix-based shell involved addressing several technical and archi
 - **`sigaction()`**: Configures signal handling to manage interrupts and other signals.
 - **`dup2()`**: Redirects input and output file descriptors for I/O redirection.
 
-## Conclusion
+## Installation Guide
 
-Building this shell served as a comprehensive learnign opportunity to demonstrate the core mechanisms of Unix-based operating systems. Through this project, I gained practical experience with system calls, process management, signal handling, and shell design principles. The implementation offers valuable insights into the foundational components of modern operating systems, which can be applied to further development and exploration in the field of system programming.
+### 1. Clone the Repository
+First, clone the repository to your local machine:
+
+```bash
+git clone https://github.com/yourusername/UnixShell.git
+cd UnixShell
+```
+
+### 2. Build the Project
+You can build the project in different modes:
+
+- **To create both release and debug directories:**
+
+  ```bash
+  make
+  ```
+
+- **To create only the release directory:**
+
+  ```bash
+  make release
+  ```
+
+- **To create only the debug directory:**
+
+  ```bash
+  make debug
+  ```
+
+### 3. Run the Program
+
+After building the project, you can run the UnixShell program with the following command:
+
+```bash
+./unixshell
+```
